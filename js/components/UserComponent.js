@@ -6,7 +6,7 @@ export default {
         <div class="card rounded" @click="navToUserHome()">
             <div class="card-body text-center">
                 <img :src="'images/user/' + liveuser.avatar + '.jpg'" class="rounded-circle img-fluid">
-                <p>{{ liveuser.uname }}</p>
+                <p>{{ liveuser.username }}</p>
             </div>
         </div>
     </div>`,
@@ -19,7 +19,10 @@ export default {
 
     methods: {
         navToUserHome() {
-            debugger;
+            // debugger;
+            //push through to home page (when a user logs in)
+            //they will be stored and can go right to home
+            localStorage.setItem("cachedUser", JSON.stringify(this.liveuser));
 
             // send this user to its home page, and pass the user object to the home page
             this.$router.push({ name: "home", params: { currentuser: this.liveuser }})
