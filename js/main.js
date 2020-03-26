@@ -10,7 +10,7 @@ import UserHomeComponent from './components/UserHomeComponent.js';
       { path: '/', redirect: { name: "login" } },
       { path: '/login', name: "login", component: LoginComponent },
       { path: '/users', name: 'users', component: AllUsersComponent },
-      { path: '/userhome', name: 'home', component: UserHomeComponent, props: true }
+      { path: '/userhome', name: 'home', component: UserHomeComponent, props: true } //important for passing data
     ]
   });
 
@@ -31,9 +31,30 @@ import UserHomeComponent from './components/UserHomeComponent.js';
 
       logout() {
         // push user back to login page
-        this.$router.push({ path: "/login" });
+        this.$router.push({ name: "login" });
         this.authenticated = false;
+
+        if (localStorage.getItem("cachedUser")) {
+          localStorage.removeItem("cachedUser");
+        }
       }
+    },
+
+    created: function() {
+      //check for a user in localStorage
+      // if we logged in before, this should be here until we manually remove
+
+      if (localStorage.getItem("cachedUser")) {
+        let user = JSON.parse(localStorage.getItem("cachedUser"));
+
+        this.authenticated = true;
+
+        //bypass login system (send to home route)
+        this.$router.push({ name: "home", params: { currentuser: user } });
+      } else {
+        this.$router.push({ name: "login" });
+      }
+      
     },
 
     router: router

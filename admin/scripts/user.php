@@ -65,7 +65,7 @@ function getAllUsers(){
             $currentuser['admin'] = $user['user_admin'];
             $currentuser['avatar'] = $user['user_avatar'];
             $currentuser['permissions'] = $user['user_permissions'];
-            $currentuser['uname'] = $user['user_name'];
+            $currentuser['username'] = $user['user_name'];
 
             $users[] = $currentuser;
         }
