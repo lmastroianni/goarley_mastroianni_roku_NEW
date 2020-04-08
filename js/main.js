@@ -37,6 +37,9 @@ import UserHomeComponent from './components/UserHomeComponent.js';
         if (localStorage.getItem("cachedUser")) {
           localStorage.removeItem("cachedUser");
         }
+
+        if (localStorage.getItem("cachedVideo"))
+          localStorage.removeItem("cachedVideo");
       }
     },
 
