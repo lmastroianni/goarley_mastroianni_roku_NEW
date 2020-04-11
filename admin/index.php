@@ -10,7 +10,7 @@
         if (isset($_GET['filter'])) {
             //Filter
             $args = array(
-                'tbl' => 'tbl_movies',
+                'tbl' => $tbl,
                 'tbl2' => 'tbl_genre',
                 'tbl3' => 'tbl_mov_genre',
                 'col' => 'movies_id',
@@ -19,9 +19,9 @@
                 'filter' => $_GET['filter'],
             );
             
-            $results = getMoviesByFilter($tbl, $tbl2, $tbl3, $col, $col2, $col3, $filter);
+            $results = getMoviesByFilter($args);
 
-            echo json_encode($results);
+            echo json_encode($results->fetchAll(PDO::FETCH_ASSOC));
 
         } else {
 
