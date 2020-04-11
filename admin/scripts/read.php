@@ -34,7 +34,8 @@ function getSingleMovie($tbl, $col, $id)
 function getMoviesByFilter($args)
 {
     $pdo = Database::getInstance()->getConnection();
-
+    //send back filter results
+    //look into genre filter
     $filterQuery = 'SELECT * FROM ' . $args['tbl'] . ' AS t, ' . $args['tbl2'] . ' AS t2, ' . $args['tbl3'] . ' AS t3';
     $filterQuery .= ' WHERE t.' . $args['col'] . ' = t3.' . $args['col'];
     $filterQuery .= ' AND t2.' . $args['col2'] . ' = t3.' . $args['col2'];
@@ -42,8 +43,8 @@ function getMoviesByFilter($args)
 
     $results = $pdo->query($filterQuery);
 
-    echo $filterQuery;
-    exit;
+    // echo $filterQuery;
+    // exit;
 
     if ($results) {
         return $results;
