@@ -40,7 +40,14 @@ import UserHomeComponent from './components/UserHomeComponent.js';
 
         if (localStorage.getItem("cachedVideo"))
           localStorage.removeItem("cachedVideo");
+      
+
+        if (localStorage.getItem("cachedShow"))
+          localStorage.removeItem("cachedShow");
       }
+
+      
+      
     },
 
     created: function() {

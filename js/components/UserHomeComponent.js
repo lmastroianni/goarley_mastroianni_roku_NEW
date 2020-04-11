@@ -1,5 +1,6 @@
 import VideoComponent from "./VideoComponent.js";
 import AudioComponent from "./AudioComponent.js";
+import ShowComponent from "./ShowComponent.js";
 
 export default {
     name: "TheUserHomeComponent",
@@ -33,7 +34,7 @@ export default {
             
             mediaTypes: [
                 { iconClass: "fas fa-film", description: "Movies", component: VideoComponent },
-                { iconClass: "fas fa-tv", description: "Television", component: VideoComponent },
+                { iconClass: "fas fa-tv", description: "Show", component: ShowComponent },
                 { iconClass: "fas fa-headphones", description: "Audio", component: AudioComponent },
                     
             ]
