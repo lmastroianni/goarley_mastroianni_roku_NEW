@@ -14,7 +14,7 @@ export default {
             <div class="text-section">
                 <h4 class="media-name">{{currentMediaDetails.song_name}}</h4>
                 <span class="media-year">{{currentMediaDetails.song_year}}</span>
-                <span class="media-genre">{{currentMediaDetails.song_genre}}</span>
+                
             </div>
         </div
 
@@ -56,8 +56,7 @@ export default {
                         localStorage.setItem("cachedSong", JSON.stringify(data));
 
                         this.allRetrievedSongs = data;
-                        
-                        // Check for content restrictions
+                
                         
 
                        
@@ -74,10 +73,10 @@ export default {
                             }
                         }
 
-                        // Caches shows
+                        /
                         localStorage.setItem("cachedSong", JSON.stringify(data));
 
-                        // Sets current media on initial page load
+                 
                         if(this.allRetrievedSongs.length !== 0 && this.pageLoad == false) {
                             this.currentMediaDetails = this.allRetrievedSongs[0];
                             this.pageLoad = true;
@@ -86,9 +85,9 @@ export default {
             }
         },
 
-        // Reloads songs filtered by year
+        
         filterByYear() {
-            // Remove cached songs
+          
             if(localStorage.getItem("cachedSong")) {
                 localStorage.removeItem("cachedSong");
             }
