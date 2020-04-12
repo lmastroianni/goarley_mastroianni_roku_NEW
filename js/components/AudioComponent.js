@@ -1,5 +1,5 @@
 export default {
-    name: "TheMusicComponent",
+    name: "TheAudioComponent",
 
     template: `
     <section class="media-container">
