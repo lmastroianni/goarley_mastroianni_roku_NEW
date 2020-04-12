@@ -10,4 +10,7 @@
             <li><a href="index.php?filter=All">All</a></li>
         </ul>
     </nav>
+
+
+    
 </header>

@@ -16,10 +16,10 @@ export default {
                             <label class="sr-only" for="inlineFormPassword">Name</label>
                             <input v-model="input.password" type="password" class="form-control" id="inlineFormPassword" placeholder="password" required>
                         </div>
-
+                
                         <div class="col-auto my-1">
                             <button v-on:click.prevent="login()" type="submit" class="btn btn-primary">Go!</button>
-                        </div>
+                           
                     </div>
                 </form>            
             </div>

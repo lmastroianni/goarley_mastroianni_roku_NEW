@@ -1,36 +1,26 @@
 export default {
-    name: "TheAudioComponent",
+    name: "TheMusicComponent",
 
     template: `
-    <section>
-        <div class="row">
-            <div class="col-12 order-2 order-md-1 col-md-3 media-container">
-                <h4 class="media-title">{{currentMediaDetails.movies_title}}</h4>
-                <p class="media-details" v-html="currentMediaDetails.movies_storyline"></p>
-                <span class="media-time">{{currentMediaDetails.movies_runtime}}</span>
-                <span class="media-year">{{currentMediaDetails.movies_year}}</span>
+    <section class="media-container">
+        <h1 class="hidden">Music Component</h1>
+        <div class="top-section">
+            <div class="music-container">
+                <img class="selected-music" :src="'images/' + currentMediaDetails.song_cover_art" alt="Album Cover">
+            
+                <audio controls :src="'audio/' + currentMediaDetails.song_file" class="audio-player"></audio>
             </div>
 
-            <div class="col-12 order-1 order-md-2 col-md-9 media-container">
-                <video v-if="currentMediaDetails" autoplay controls muted :src="'video/' + currentMediaDetails.movies_trailer" class="fs-video"></video>
+            <div class="text-section">
+                <h4 class="media-name">{{currentMediaDetails.song_name}}</h4>
+                <span class="media-year">{{currentMediaDetails.song_year}}</span>
+                <span class="media-genre">{{currentMediaDetails.song_genre}}</span>
             </div>
-        </div>
-<div class="col-12 col-sm-9 media-info">
-<ul class="media-genres">
-        <li><a href="1950" @click.prevent="filterMedia('1950')">50s</a></li>
-        <li><a href="1960" @click.prevent="filterMedia('1960')">60s</a></li>
-        <li><a href="1970" @click.prevent="filterMedia('1970')">70s</a></li>
-        <li><a href="1980" @click.prevent="filterMedia('1980')">80s</a></li>
-        <li><a href="1990" @click.prevent="filterMedia('1990')">90s</a></li>
-        <li><a href="All" @click.prevent="retrieveVideoContent">All</a></li>
-</ul>
-</div>
+        </div
 
-        <div class="row">
-         <div class="col-12 col-sm-9">
-            <div class="thumb-wrapper clearfix">
-                <img v-for="item in allRetrievedMedia" :src="'images/' + item.movies_cover" alt="media
-                thumb" @click="loadNewMovie(item)" class="img-thumbnail rounded float-left media-thumb">
+                <div class="songs">
+                
+                    <img class="poster" v-for="item in allRetrievedSongs" :src="'images/' + item.song_cover_art" alt="Album Cover" @click="loadNewSong(item)">
                 </div>
             </div>
         </div>
@@ -40,61 +30,77 @@ export default {
     data: function () {
         return {
             currentMediaDetails: {},
-            allRetrievedMedia: []
+            allRetrievedSongs: [],
+
         }
     },
 
     created: function() {
-        this.retrieveVideoContent();
+        this.retrieveSongContent();
     },
 
     methods: {
-        filterMedia(filter) {
-            // debugger;
+        retrieveSongContent() {
+            
+            // Fetches all of the song content
+             if(localStorage.getItem("cachedSong")) {
+                this.allRetrievedSongs = JSON.parse(localStorage.getItem("cachedSong"));
 
-            let url = `./admin/index.php?media=movies&filter=${filter}`;
-
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    this.allRetrievedMedia = data;
-                    this.currentMediaDetails = data[0];
-                })
-
-        },
-
-        retrieveVideoContent() {
-            // fetch all the video content here (don't care about filtering, genre etc at this point)
-            // debugger;
-
-            if (localStorage.getItem("cachedVideo")) {
-                this.allRetrievedVideos = JSON.parse(localStorage.getItem("cachedVideo"));
-
-                this.currentMediaDetails = this.allRetrievedVideos[0];
-
+                this.currentMediaDetails = this.allRetrievedSongs[0];
             } else {
-                                //add permissions here for children
-                let url = `./admin/index.php?media=movies`;
-                //store a video
+                let url = `./admin/index.php?media=songs`;
+
                 fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    localStorage.setItem("cachedVideo", JSON.stringify(data));
-                    this.cachedMedia = true;
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem("cachedSong", JSON.stringify(data));
 
-                    this.allRetrievedMedia = data;
-                    this.currentMediaDetails = data[0];
-                    
-                })
+                        this.allRetrievedSongs = data;
+                        
+                        // Check for content restrictions
+                        
 
+                       
+                        i = 0;
+                        while(i < this.allRetrievedSongs.length){
+                            if(filterYear !== "1000") {
+                                if(this.allRetrievedSongs[i].song_year_code !== filterYear){
+                                    this.allRetrievedSongs.splice(i, 1);
+                                } else {
+                                    i++;
+                                }
+                            } else {
+                                break;
+                            }
+                        }
+
+                        // Caches shows
+                        localStorage.setItem("cachedSong", JSON.stringify(data));
+
+                        // Sets current media on initial page load
+                        if(this.allRetrievedSongs.length !== 0 && this.pageLoad == false) {
+                            this.currentMediaDetails = this.allRetrievedSongs[0];
+                            this.pageLoad = true;
+                        }
+                    })    
             }
-           
-
-
         },
 
-        loadNewMovie(movie) {
-            this.currentMediaDetails = movie;
+        // Reloads songs filtered by year
+        filterByYear() {
+            // Remove cached songs
+            if(localStorage.getItem("cachedSong")) {
+                localStorage.removeItem("cachedSong");
+            }
+
+            this.retrieveSongContent();
+        },
+
+        
+        loadNewSong(song) {
+            if(this.allRetrievedSongs.length !== 0) {
+                this.currentMediaDetails = song;
+            }
         }
     }
 }
