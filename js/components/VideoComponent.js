@@ -17,10 +17,11 @@ export default {
         </div>
 <div class="col-12 col-sm-9 media-info">
 <ul class="media-genres">
-        <li><a href="action" @click.prevent="filterMedia('action')">Action</a></li>
-        <li><a href="comedy" @click.prevent="filterMedia('comedy')">Comedy</a></li>
-        <li><a href="family" @click.prevent="filterMedia('family')">Family</a></li>
-        <li><a href="fantasy" @click.prevent="filterMedia('fantasy')">Fantasy</a></li>
+        <li><a href="1950" @click.prevent="filterMedia('1950')">50s</a></li>
+        <li><a href="1960" @click.prevent="filterMedia('1960')">60s</a></li>
+        <li><a href="1970" @click.prevent="filterMedia('1970')">70s</a></li>
+        <li><a href="1980" @click.prevent="filterMedia('1980')">80s</a></li>
+        <li><a href="1990" @click.prevent="filterMedia('1990')">90s</a></li>
         <li><a href="All" @click.prevent="retrieveVideoContent">All</a></li>
 </ul>
 </div>
@@ -72,7 +73,7 @@ export default {
                 this.currentMediaDetails = this.allRetrievedVideos[0];
 
             } else {
-                                //add permissions here for child restrictions
+                                //add permissions here for children
                 let url = `./admin/index.php?media=movies`;
                 //store a video
                 fetch(url)
