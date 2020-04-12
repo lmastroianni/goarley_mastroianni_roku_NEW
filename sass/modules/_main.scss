@@ -2,9 +2,27 @@
 
 html { position: relative; min-height: 100%; }
 
+main
+{
+	background-color: $dark-bg;
+	height: 1320px;
+}
+
+h4
+{
+	font-family: 'Roboto', sans-serif;
+	letter-spacing: 2px;
+	font-weight: 500;
+}
+
+p
+{
+	font-family: 'Roboto', sans-serif;
+}
+
 body {
-	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	background-color: black;
+	font-family: 'Roboto', sans-serif;
+	// background-color: black;
 	color: white;
 	margin-bottom: 100px;
 	background: url(../images/gunmetal.jpg) repeat;
@@ -71,3 +89,45 @@ nav:not(.side-nav) {
 }
 
 .user-message { text-align: center; font-size: 2rem; }
+
+
+
+.col-sm-12 
+{
+	margin-top: 20px;
+}
+
+.col-sm-12 img
+{
+	margin-left: 20px;
+}
+
+.col-12
+{
+	margin: 0 auto;
+	width: 100%;
+	border-radius: 20px;
+}
+
+.media-info
+{
+	text-align: center;
+	width: 80%;
+}
+
+.order-2 h4
+{
+	margin-top: 30%;
+}
+
+.order-2 p
+{
+	margin-top: 5px;
+}
+
+.thumb-wrapper
+{
+	margin-left: auto;
+}
+
+
